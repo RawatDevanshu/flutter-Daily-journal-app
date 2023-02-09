@@ -17,7 +17,6 @@ This daily journal Flutter app was developed to help users record and manage the
         </td>
         <td>
         <img src="https://user-images.githubusercontent.com/76153868/217683616-1a2f3ef6-c05b-4468-a7a9-938fbfd919fd.png" width="300" height="620"/>
-
         </td>
         <td>
         <img src="https://user-images.githubusercontent.com/76153868/217683677-a62ee1e2-251a-407a-9698-6a9425d8fd60.png" width="300" height="620" />
