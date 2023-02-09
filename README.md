@@ -13,16 +13,17 @@ This daily journal Flutter app was developed to help users record and manage the
     </tr>
     <tr>
         <td>
-        <img src="https://user-images.githubusercontent.com/76153868/214220126-2d3ba2b7-4f2f-4d2c-98fb-c4325b719b4b.png" width="300" height="620" />
+        <img src="https://user-images.githubusercontent.com/76153868/217683534-90918be8-cc01-4ff1-9ac8-174b59a7b833.png" width="300" height="620" />
         </td>
         <td>
-        <img src="https://user-images.githubusercontent.com/76153868/214220126-2d3ba2b7-4f2f-4d2c-98fb-c4325b719b4b.png" width="300" height="620" />
+        <img src="https://user-images.githubusercontent.com/76153868/217683616-1a2f3ef6-c05b-4468-a7a9-938fbfd919fd.png" width="300" height="620"/>
+
         </td>
         <td>
-        <img src="https://user-images.githubusercontent.com/76153868/214220126-2d3ba2b7-4f2f-4d2c-98fb-c4325b719b4b.png" width="300" height="620" />
+        <img src="https://user-images.githubusercontent.com/76153868/217683677-a62ee1e2-251a-407a-9698-6a9425d8fd60.png" width="300" height="620" />
         </td>
         <td>
-        <img src="https://user-images.githubusercontent.com/76153868/213914549-a24182c4-ab60-4db2-861d-e22d78e7e881.png" width="300" height="620" />
+        <img src="https://user-images.githubusercontent.com/76153868/217683690-9800ed5a-e813-45c6-baa3-9e51c3f74b7a.png" width="300" height="620" />
         </td>
     </tr>
 </table>
