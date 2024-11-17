@@ -16,29 +16,50 @@ class CrudMethods {
   }) async {
     try {
       _instance
-          .collection("Users")
-          .doc(currentUser!.email)
+          .collection("users")
+          .doc(currentUser!.uid)
           .collection("journals")
           .add({
         'title': title,
         'text': data,
-        'date': "${today.day}-${today.month}-${today.year}",
-        'time': "${today.hour}:${today.minute}",
+        'date':
+            "${today.day}-${today.month}-${today.year}-${today.hour}:${today.minute}",
       });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
   }
 
- getData() async {
+  getData() async {
     return await _instance
-        .collection("Users/${currentUser?.email}/journals")
+        .collection("users/${currentUser?.uid}/journals")
         .get();
   }
 
-Future<void> delete({required String docId}) async {
+  Future<void> updateData({
+    required String docId,
+    required String title,
+    required String text,
+    required BuildContext context,
+  }) async {
+    try {
+      await _instance
+          .collection("users")
+          .doc(currentUser!.uid)
+          .collection("journals")
+          .doc(docId)
+          .update({
+        'title': title,
+        'text': text,
+      });
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!);
+    }
+  }
+
+  Future<void> delete({required String docId}) async {
     return await _instance
-        .collection("Users/${currentUser?.email}/journals")
+        .collection("users/${currentUser?.uid}/journals")
         .doc(docId)
         .delete();
   }

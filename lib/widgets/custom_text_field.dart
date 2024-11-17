@@ -18,19 +18,23 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       maxLines: maxLines,
       controller: controller,
+      style: const TextStyle(color: Pallete.dark, fontSize: 17),
+      cursorColor: Pallete.dark,
       decoration: InputDecoration(
+        fillColor: Pallete.white2,
+        filled: true,
         hintText: hintText,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: Pallete.borderColor,
-            width: 2,
-          ),
+        hintStyle: const TextStyle(
+          color: Pallete.darkHint,
+          fontSize: 16,
         ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
-            color: Pallete.gradient2,
+            color: Pallete.accent,
             width: 2,
           ),
         ),

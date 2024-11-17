@@ -1,5 +1,6 @@
 import 'package:daily_journal/firebase_options.dart';
 import 'package:daily_journal/screens/home_screen.dart';
+import 'package:daily_journal/screens/landing_screen.dart';
 import 'package:daily_journal/screens/login_screen.dart';
 import 'package:daily_journal/services/firebase_auth_methods.dart';
 import 'package:daily_journal/utils/pallete.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Daily Journal',
-        theme: ThemeData.light()
-            .copyWith(scaffoldBackgroundColor: Pallete.backgroundColor),
+        theme: ThemeData.light().copyWith(
+            scaffoldBackgroundColor: Pallete.backgroundColor,
+            textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Inter')),
         home: const AuthWrapper(),
       ),
     );
@@ -46,7 +48,7 @@ class AuthWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return const HomeScreen();
     } else {
-      return LoginScreen();
+      return const LandingScreen();
     }
   }
 }

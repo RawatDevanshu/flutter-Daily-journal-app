@@ -1,28 +1,26 @@
 import 'package:daily_journal/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
-class GradientButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final double width, height;
-  const GradientButton(
+  const CustomButton(
       {super.key,
       required this.onPressed,
       required this.text,
-      this.width = 300,
-      this.height = 70});
+      this.width = double.infinity,
+      this.height = 40});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width,
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Pallete.gradient1,
-            Pallete.gradient2,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(10),
+        color: Pallete.dark,
+        borderRadius: BorderRadius.circular(8),
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -34,8 +32,9 @@ class GradientButton extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 17,
+            color: Pallete.white0,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
           ),
         ),
       ),

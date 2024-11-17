@@ -1,30 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_journal/screens/home_screen.dart';
 import '../services/firestore_crud_methods.dart';
 import '../widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/pallete.dart';
 
-class CreateJournal extends StatelessWidget {
-  final TextEditingController dataController = TextEditingController();
-  final TextEditingController titleController = TextEditingController();
-  CreateJournal({super.key});
+class EditJournal extends StatelessWidget {
+  final TextEditingController dataController;
+  final TextEditingController titleController;
+  final QueryDocumentSnapshot<Object?> data;
+  EditJournal({super.key, required this.data})
+      : dataController = TextEditingController(text: data['text']),
+        titleController = TextEditingController(text: data['title']);
 
-  void uploadData(String title, String data, BuildContext context) async {
+  void updateData(
+      String docId, String title, String data, BuildContext context) async {
     await CrudMethods(FirebaseFirestore.instance)
-        .addData(title: title, data: data, context: context)
-        .then((result) => Navigator.pop(context));
+        .updateData(docId: docId, title: title, text: data, context: context)
+        .then((result) => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (Route<dynamic> route) => false));
   }
 
   @override
   Widget build(BuildContext context) {
+    var docId = data.id;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Pallete.backgroundColor,
         actions: [
           GestureDetector(
             onTap: () {
-              uploadData(titleController.text, dataController.text, context);
+              updateData(
+                  docId, titleController.text, dataController.text, context);
             },
             child: const Padding(
                 padding: EdgeInsets.all(16),

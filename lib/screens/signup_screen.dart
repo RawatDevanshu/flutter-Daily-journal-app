@@ -1,31 +1,44 @@
 import 'package:daily_journal/screens/home_screen.dart';
-import 'package:daily_journal/screens/signup_screen.dart';
 import 'package:daily_journal/services/firebase_auth_methods.dart';
 import 'package:daily_journal/utils/pallete.dart';
+import 'package:daily_journal/utils/showSnackBar.dart';
 import 'package:daily_journal/widgets/custom_button.dart';
 import 'package:daily_journal/widgets/login_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 
-class LoginScreen extends StatelessWidget {
+class SignupScreen extends StatelessWidget {
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  LoginScreen({super.key});
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  SignupScreen({super.key});
 
   void dipose() {
+    usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
   }
 
-  void loginUser(BuildContext context) async {
+  void signUpUser(BuildContext context) async {
+    if (passwordController.text != confirmPasswordController.text) {
+      showSnackBar(context, 'Passwords do not match');
+      return;
+    }
+
     String res = await FirebaseAuthMethods(FirebaseAuth.instance)
-        .signInWithEmail(
+        .signUpWithEmail(
+            username: usernameController.text,
             email: emailController.text,
             password: passwordController.text,
             context: context);
-    if (res == "success") {
+    if (res == 'email-already-in-use') {
+      showSnackBar(context, 'Email already in use');
+    } else if (res == "success") {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
           (route) => false);
     }
   }
@@ -42,7 +55,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               const Spacer(),
               const Text(
-                "Sign in",
+                "Signup",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 40,
@@ -50,6 +63,13 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 64),
+              LoginField(
+                hintText: 'Enter your Username',
+                labelText: 'Username',
+                controller: usernameController,
+                isObscured: false,
+              ),
+              const SizedBox(height: 16),
               LoginField(
                 hintText: 'Enter your Email',
                 labelText: 'Email',
@@ -62,28 +82,20 @@ class LoginScreen extends StatelessWidget {
                 controller: passwordController,
                 isObscured: true,
               ),
+              const SizedBox(height: 8),
+              LoginField(
+                hintText: 'Confirm Password',
+                controller: confirmPasswordController,
+                isObscured: true,
+              ),
               const SizedBox(height: 32),
               CustomButton(
                 height: 50,
-                text: 'Sign in',
+                text: 'Signup',
                 onPressed: () {
-                  loginUser(context);
+                  signUpUser(context);
                 },
               ),
-              const SizedBox(height: 16),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => SignupScreen()),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "New Here? Sign Up!",
-                    style: TextStyle(color: Pallete.darkHint),
-                  )),
               const Spacer(),
             ],
           ),
