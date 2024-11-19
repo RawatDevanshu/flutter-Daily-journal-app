@@ -1,16 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_journal/screens/edit_journal_screen.dart';
 import 'package:daily_journal/utils/common_functions.dart';
-import '../services/firestore_crud_methods.dart';
 import 'package:flutter/material.dart';
-
 import '../utils/pallete.dart';
+import '../widgets/delete_entry_dialog.dart';
 
+/// A widget that displays a journal entry.
 class DisplayJournal extends StatelessWidget {
+  /// Creates a [DisplayJournal] widget.
+  ///
+  /// The [data] parameter is required and must not be null.
   final QueryDocumentSnapshot<Object?> data;
   const DisplayJournal({super.key, required this.data});
 
   @override
+
+  /// Builds the UI for the journal entry.
+  ///
+  /// This method returns a [Scaffold] containing the journal entry details.
   Widget build(BuildContext context) {
     var dateInfo = convertDateToArray(data['date']);
     return Scaffold(
@@ -35,32 +42,7 @@ class DisplayJournal extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      backgroundColor: Pallete.backgroundColor,
-                      title: const Text("Delete",
-                          style: TextStyle(color: Pallete.accent)),
-                      content: const Text(
-                          "Do you really want to delete this entry?"),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Cancel",
-                                style: TextStyle(color: Pallete.darkHint))),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: Pallete.accent),
-                            onPressed: () {
-                              Navigator.pop(context);
-                              CrudMethods(FirebaseFirestore.instance)
-                                  .delete(docId: data.id);
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Continue",
-                                style: TextStyle(color: Pallete.white2))),
-                      ],
-                    );
+                    return DeleteEntryDialog(data: data);
                   },
                 );
               },

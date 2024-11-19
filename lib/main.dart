@@ -1,7 +1,6 @@
 import 'package:daily_journal/firebase_options.dart';
 import 'package:daily_journal/screens/home_screen.dart';
 import 'package:daily_journal/screens/landing_screen.dart';
-import 'package:daily_journal/screens/login_screen.dart';
 import 'package:daily_journal/services/firebase_auth_methods.dart';
 import 'package:daily_journal/utils/pallete.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// entry point of the application
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// Wraps Authentication Logic over the whole application
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
 

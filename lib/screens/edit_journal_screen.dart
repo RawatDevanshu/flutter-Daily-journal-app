@@ -6,22 +6,33 @@ import 'package:flutter/material.dart';
 
 import '../utils/pallete.dart';
 
+/// A screen for editing journal entries.
 class EditJournal extends StatelessWidget {
+  /// Creates an instance of [EditJournal].
+  ///
+  /// Requires a [data] parameter which contains the journal entry data.
   final TextEditingController dataController;
   final TextEditingController titleController;
   final QueryDocumentSnapshot<Object?> data;
+
   EditJournal({super.key, required this.data})
       : dataController = TextEditingController(text: data['text']),
         titleController = TextEditingController(text: data['title']);
 
+  /// Updates the journal entry in Firestore.
+  ///
+  /// Takes the [docId] of the document to update, the new [title],
+  /// the updated [data], and the [context] for navigation.
   void updateData(
       String docId, String title, String data, BuildContext context) async {
     await CrudMethods(FirebaseFirestore.instance)
-        .updateData(docId: docId, title: title, text: data, context: context)
-        .then((result) => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-            (Route<dynamic> route) => false));
+        .updateData(docId: docId, title: title, text: data, context: context);
+    if (context.mounted) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   @override

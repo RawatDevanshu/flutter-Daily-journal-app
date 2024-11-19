@@ -3,9 +3,16 @@ import 'package:daily_journal/utils/pallete.dart';
 import 'package:daily_journal/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
+/// A screen that serves as the landing page for the application.
+/// It provides an introduction to the journaling app and a button to navigate to the login screen.
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
 
+  /// Builds the landing screen widget.
+  /// 
+  /// This method returns a [Scaffold] containing a background, an image,
+  /// and text elements that describe the app, along with a button to
+  /// navigate to the login screen.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

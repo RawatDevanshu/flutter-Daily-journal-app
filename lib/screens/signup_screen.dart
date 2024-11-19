@@ -1,12 +1,14 @@
 import 'package:daily_journal/screens/home_screen.dart';
 import 'package:daily_journal/services/firebase_auth_methods.dart';
 import 'package:daily_journal/utils/pallete.dart';
-import 'package:daily_journal/utils/showSnackBar.dart';
+import 'package:daily_journal/utils/show_snackbar.dart';
 import 'package:daily_journal/widgets/custom_button.dart';
 import 'package:daily_journal/widgets/login_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 
+/// Sign up screen for a new user
+/// It asks for details like username, email and password to create new user
 class SignupScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -22,6 +24,10 @@ class SignupScreen extends StatelessWidget {
     confirmPasswordController.dispose();
   }
 
+  /// Signs up the user with the provided credentials.
+  ///
+  /// Displays a snackbar message if the passwords do not match or if the email
+  /// is already in use. Navigates to the [HomeScreen] on successful signup.
   void signUpUser(BuildContext context) async {
     if (passwordController.text != confirmPasswordController.text) {
       showSnackBar(context, 'Passwords do not match');
@@ -34,9 +40,9 @@ class SignupScreen extends StatelessWidget {
             email: emailController.text,
             password: passwordController.text,
             context: context);
-    if (res == 'email-already-in-use') {
+    if (res == 'email-already-in-use' && context.mounted) {
       showSnackBar(context, 'Email already in use');
-    } else if (res == "success") {
+    } else if (res == "success" && context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomeScreen()),
           (route) => false);

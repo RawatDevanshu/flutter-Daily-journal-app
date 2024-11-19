@@ -7,25 +7,36 @@ import 'package:daily_journal/widgets/login_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 
+/// A screen that allows users to log in to their account.
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  /// Creates an instance of [LoginScreen].
   LoginScreen({super.key});
 
+  /// Controller for the email input field.
+  final TextEditingController emailController = TextEditingController();
+
+  /// Controller for the password input field.
+  final TextEditingController passwordController = TextEditingController();
+
+  /// Disposes of the controllers when the widget is removed from the widget tree.
   void dipose() {
     emailController.dispose();
     passwordController.dispose();
   }
 
+  /// Logs in the user with the provided email and password.
+  ///
+  /// Returns a [String] indicating the result of the login attempt.
+  /// If successful, navigates to the [HomeScreen].
   void loginUser(BuildContext context) async {
     String res = await FirebaseAuthMethods(FirebaseAuth.instance)
         .signInWithEmail(
             email: emailController.text,
             password: passwordController.text,
             context: context);
-    if (res == "success") {
+    if (res == "success" && context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
           (route) => false);
     }
   }
