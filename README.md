@@ -19,12 +19,13 @@
     <th>Home Page</th>
     <th>Create Journal Page</th>
     <th>Display Journal Page</th>
+
   </tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/76153868/217683534-90918be8-cc01-4ff1-9ac8-174b59a7b833.png" width="300" height="450" /></td>
-    <td><img src="https://user-images.githubusercontent.com/76153868/217683616-1a2f3ef6-c05b-4468-a7a9-938fbfd919fd.png" width="300" height="450"/></td>
-    <td><img src="https://user-images.githubusercontent.com/76153868/217683677-a62ee1e2-251a-407a-9698-6a9425d8fd60.png" width="300" height="450" /></td>
-    <td><img src="https://user-images.githubusercontent.com/76153868/217683690-9800ed5a-e813-45c6-baa3-9e51c3f74b7a.png" width="300" height="450" /></td>
+    <td><img src="https://github.com/user-attachments/assets/0206d1f9-986e-4f47-93c4-94928ef507b8" width="300" height="450" /></td>
+    <td><img src="https://github.com/user-attachments/assets/1eefec8d-c9ab-42dc-8f52-fc2524718a78" width="300" height="450"/></td>
+    <td><img src="https://github.com/user-attachments/assets/727886dd-bf01-47de-a16a-03280befcc38" width="300" height="450" /></td>
+    <td><img src="https://github.com/user-attachments/assets/386e0f3e-7d91-4f71-bd04-99bbef2026ba" width="300" height="450" /></td>
   </tr>
 </table>
 
