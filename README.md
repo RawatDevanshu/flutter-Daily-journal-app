@@ -2,11 +2,7 @@
 
 1. [Daily Journal App](#daily-journal-app)
 2. [Download Apk Directly](#download-apk-directly)
-3. [Features](#features)
-   - [Authentication Page](#authentication-page)
-   - [Home Page](#home-page)
-   - [Create Journal Page](#create-journal-page)
-   - [Display Journal Page](#display-journal-page)
+3. [Features](#features) 
 4. [Screenshots](#screenshots)
 5. [Technologies Used](#technologies-used)
 6. [Development Environment Setup](#development-environment-setup)
@@ -21,7 +17,7 @@
    - [Set Up Firebase](#set-up-firebase)
    - [Run the Application](#run-the-application-to-start-the-app-on-a-connected-device-or-emulator)
 8. [Running Tests](#running-tests)
-9. [Further Reading](#further-reading)
+
 
 <h1>Daily Journal App</h1>
 
@@ -76,8 +72,10 @@ error downloading? the apk is present in root directory of the repo
 
 Ensure Flutter is installed on your system. Follow the [official Flutter installation guide](https://docs.flutter.dev/get-started/install) for your operating system.
 
-    # Verify Flutter installation by running this command in terminal
-    flutter doctor
+```bash 
+# Verify Flutter installation by running this command in terminal
+flutter doctor
+```
 
 Make sure there are no unresolved issues before proceeding.
 
@@ -85,7 +83,9 @@ Make sure there are no unresolved issues before proceeding.
 
 Flutter comes bundled with the Dart SDK. Ensure it's properly installed by checking the Dart version:
 
-    dart --version
+```bash
+dart --version
+```
 
 ### 3- Install IDE or Code Editor
 
@@ -95,40 +95,93 @@ Use an IDE like Android Studio or Visual Studio Code with Flutter and Dart plugi
 
 Install the Firebase CLI to initialize Firebase in your project.
 
-    npm install -g firebase-tools
-    firebase login
+```bash
+npm install -g firebase-tools
+firebase login
+```
 
 # Project Setup
 
 ### Clone the Repository
 
-    git clone <repository-url>
-    cd flutter-Daily-journal-app
+```bash
+git clone <repository-url>
+cd flutter-Daily-journal-app
+```
 
 For Installing Dependencies Run the following command to fetch all dependencies mentioned in the pubspec.yaml file:
-
-    flutter pub get
-
+```bash
+flutter pub get
+```
 ### Set Up Firebase
 
 Install the FlutterFire CLI to configure Firebase.
-
-    dart pub global activate flutterfire_cli
-
+```bash
+dart pub global activate flutterfire_cli
+```
 Initialize Firebase in the project:
-
-    flutterfire configure
-
+```bash
+flutterfire configure
+```
 This generates the firebase_options.dart file with platform-specific Firebase configurations.
 
 ### Run the Application To start the app on a connected device or emulator:
-
-    flutter run
-
+```bash
+flutter run
+```
 # Running Tests
 
-Run All Unit Tests The project includes unit tests located in the test directory. Use the following command to execute all tests:
+The project includes unit tests located in the `test` directory to ensure the functionality of CRUD operations for journal entries. These tests verify the app's behavior across various scenarios, including successful operations, edge cases, and error handling. Below is a summary of the tests included in this project:
 
-    flutter test
+## List of Tests
+
+1. **Simple Add Journal Entry Test**  
+   Verifies that a new journal entry is successfully added to the Firestore collection.
+
+2. **Delete Journal Entry Test**  
+   Checks that a journal entry can be deleted and ensures the Firestore collection is updated accordingly.
+
+3. **Retrieve All Journal Entries Test**  
+   Confirms that all existing journal entries are correctly retrieved from Firestore.
+
+4. **Update Existing Journal Entry Test**  
+   Validates that an existing journal entry's title and content can be updated.
+
+5. **Add Journal Entry with Empty Title Test**  
+   Ensures the application throws an error when trying to add an entry with an empty title.
+
+6. **Update Non-Existent Journal Entry Test**  
+   Tests the application's response when attempting to update an entry that does not exist.
+
+7. **Delete Non-Existent Journal Entry Test**  
+   Confirms that the application handles errors when trying to delete a non-existent entry.
+
+8. **Add Journal Entry with Empty Content Test**  
+   Verifies that journal entries with empty content can be added if the title is present.
+
+9. **Retrieve Data When No Entries Exist Test**  
+   Ensures the application handles an empty Firestore collection gracefully.
+
+10. **Update Journal Entry with Empty Title Test**  
+    Ensures the application throws an error when trying to update an entry with an empty title.
+
+11. **Update Journal Entry with Empty Text Test**  
+    Verifies that an entry's text can be updated to empty while preserving the title.
+
+12. **Retrieve Journal Entries in Correct Order Test**  
+    Confirms that journal entries are retrieved in the correct order based on their timestamps.
+
+13. **Delete with Invalid Document ID Test**  
+    Ensures the application handles errors gracefully when an invalid document ID is used for deletion.
+
+## Running the Tests
+
+To execute all unit tests in the project, use the following command in the terminal:  
+
+```bash
+flutter test
+```  
+
+These tests ensure that the app's core functionality performs reliably under various conditions.
 
 This documentation should guide developers in setting up and running the project efficiently while adhering to best practices. For additional help, refer to the [official Flutter documentation](https://docs.flutter.dev/).
