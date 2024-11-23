@@ -43,11 +43,11 @@ class CrudMethods {
   }
 
   /// Retrieves all journal entries for the current user.
-  Future<QuerySnapshot> getData() async {
-    return await firestore
+  Stream<QuerySnapshot> getData() {
+    return firestore
         .collection("users/${auth.currentUser?.uid}/journals")
         .orderBy('date', descending: true)
-        .get();
+        .snapshots();
   }
 
   /// Updates an existing journal entry.
