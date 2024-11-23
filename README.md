@@ -103,7 +103,7 @@ Install the Firebase CLI to initialize Firebase in your project.
 ### Clone the Repository
 
     git clone <repository-url>
-    cd daily_journal
+    cd flutter-Daily-journal-app
 
 For Installing Dependencies Run the following command to fetch all dependencies mentioned in the pubspec.yaml file:
 
