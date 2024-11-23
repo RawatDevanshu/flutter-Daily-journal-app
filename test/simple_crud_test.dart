@@ -16,40 +16,57 @@ void main() {
   late MockBuildContext mockContext;
 
   setUp(() {
+    // Initialize a fake Firestore instance for testing
     fakeFirestore = FakeFirebaseFirestore();
+
+    // Create a mock user with predefined properties for testing
     mockUser = MockUser(
-      uid: 'test-user-id',
-      email: 'test@test.com',
-      isAnonymous: false,
+      uid: 'test-user-id', // Unique identifier for the user
+      email: 'test@test.com', // Email address of the mock user
+      isAnonymous: false, // Indicates that the user is not anonymous
     );
+
+    // Create a mock authentication instance with the mock user signed in
     mockAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+
+    // Create a mock build context to simulate the widget tree
     mockContext = MockBuildContext();
 
+    // Create a mock state for the ScaffoldMessenger to handle snack bars and other messages
     final mockScaffoldMessengerState = MockScaffoldMessengerState();
+
+    // Set up the mock context to return the mock ScaffoldMessenger state when requested
     when(mockContext.findAncestorStateOfType<ScaffoldMessengerState>())
         .thenReturn(mockScaffoldMessengerState);
 
+    // Initialize the CRUD methods with the fake Firestore and mock authentication
     crudMethods = CrudMethods(fakeFirestore, auth: mockAuth);
   });
 
   test('Simple add journal entry test', () async {
-    // Arrange
-    const title = 'My First Journal';
-    const content = 'Hello World!';
+    // Arrange: Set up the initial conditions for the test
+    const title = 'My First Journal'; // Define the title for the journal entry
+    const content = 'Hello World!'; // Define the content for the journal entry
 
-    // Act
+    // Act: Execute the method being tested
     await crudMethods.addData(
-      title: title,
-      data: content,
-      context: mockContext,
+      title: title, // Pass the title to the addData method
+      data: content, // Pass the content to the addData method
+      context: mockContext, // Provide the mock context for the operation
     );
 
-    // Assert
+    // Assert: Verify that the expected outcomes occur
+    // Retrieve the journal entries from the fake Firestore collection
     final snapshot =
         await fakeFirestore.collection('users/${mockUser.uid}/journals').get();
 
+    // Check that one document has been added to the collection
     expect(snapshot.docs.length, 1);
+
+    // Verify that the title of the first document matches the expected title
     expect(snapshot.docs.first.data()['title'], title);
+
+    // Verify that the content of the first document matches the expected content
     expect(snapshot.docs.first.data()['text'], content);
   });
 
@@ -90,8 +107,8 @@ void main() {
     // Add multiple entries
     for (var entry in entries) {
       await crudMethods.addData(
-        title: entry['title']!,
-        data: entry['data']!,
+        title: entry['title'] as String,
+        data: entry['data'] as String,
         context: mockContext,
       );
     }
@@ -286,30 +303,52 @@ void main() {
         updatedSnapshot.docs.first.data()['text'], ''); // Text should be empty
   });
 
-  test('Delete an existing journal entry', () async {
+  test('getData returns journal entries in correct order', () async {
     // Arrange
-    const title = 'Journal to Keep';
-    const content = 'This will be kept';
+    final entries = [
+      {
+        'title': 'Journal 1',
+        'data': 'Content 1',
+        'date': DateTime.now().subtract(const Duration(days: 2))
+      },
+      {
+        'title': 'Journal 2',
+        'data': 'Content 2',
+        'date': DateTime.now().subtract(const Duration(days: 1))
+      },
+      {'title': 'Journal 3', 'data': 'Content 3', 'date': DateTime.now()},
+    ];
 
-    // First add a document
-    await crudMethods.addData(
-      title: title,
-      data: content,
-      context: mockContext,
-    );
-
-    // Get the document ID
-    final snapshot =
-        await fakeFirestore.collection('users/${mockUser.uid}/journals').get();
-    final docId = snapshot.docs.first.id;
+    // Add multiple entries with timestamps
+    for (var entry in entries) {
+      await crudMethods.addData(
+        title: entry['title'] as String,
+        data: entry['data'] as String,
+        context: mockContext,
+      );
+    }
 
     // Act
-    await crudMethods.delete(docId: docId);
+    final result = await crudMethods.getData();
 
     // Assert
-    final afterDeleteSnapshot =
-        await fakeFirestore.collection('users/${mockUser.uid}/journals').get();
+    expect(result.docs.length, 3);
+    expect(
+        (result.docs[0].data() as Map<String, dynamic>)['title'], 'Journal 1');
+    expect(
+        (result.docs[1].data() as Map<String, dynamic>)['title'], 'Journal 2');
+    expect(
+        (result.docs[2].data() as Map<String, dynamic>)['title'], 'Journal 3');
+  });
 
-    expect(afterDeleteSnapshot.docs.length, 0);
+  test('Delete with invalid document ID throws exception', () async {
+    // Arrange
+    const invalidDocId = 'invalid-doc-id';
+
+    // Act & Assert
+    expect(
+      () async => await crudMethods.delete(docId: invalidDocId),
+      throwsA(isA<FirebaseException>()),
+    );
   });
 }

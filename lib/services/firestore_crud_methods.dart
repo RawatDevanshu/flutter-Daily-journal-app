@@ -46,6 +46,7 @@ class CrudMethods {
   Future<QuerySnapshot> getData() async {
     return await firestore
         .collection("users/${auth.currentUser?.uid}/journals")
+        .orderBy('date', descending: true)
         .get();
   }
 

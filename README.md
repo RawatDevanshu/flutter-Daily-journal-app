@@ -1,3 +1,28 @@
+# Table of Contents
+
+1. [Daily Journal App](#daily-journal-app)
+2. [Download Apk Directly](#download-apk-directly)
+3. [Features](#features)
+   - [Authentication Page](#authentication-page)
+   - [Home Page](#home-page)
+   - [Create Journal Page](#create-journal-page)
+   - [Display Journal Page](#display-journal-page)
+4. [Screenshots](#screenshots)
+5. [Technologies Used](#technologies-used)
+6. [Development Environment Setup](#development-environment-setup)
+   - [Prerequisites](#prerequisites)
+     - [Install Flutter](#1--install-flutter)
+     - [Install Dart SDK](#2--install-dart-sdk)
+     - [Install IDE or Code Editor](#3--install-ide-or-code-editor)
+     - [Install Firebase CLI](#4--install-firebase-cli)
+7. [Project Setup](#project-setup)
+   - [Clone the Repository](#clone-the-repository)
+   - [Install Dependencies](#for-installing-dependencies-run-the-following-command-to-fetch-all-dependencies-mentioned-in-the-pubspecyaml-file)
+   - [Set Up Firebase](#set-up-firebase)
+   - [Run the Application](#run-the-application-to-start-the-app-on-a-connected-device-or-emulator)
+8. [Running Tests](#running-tests)
+9. [Further Reading](#further-reading)
+
 <h1>Daily Journal App</h1>
 
 <p>The Daily Journal app is a Flutter application developed to help users record and manage their daily thoughts and experiences. This app utilizes Firebase, a cloud-based backend service, for user authentication and storage. The app consists of four main pages: authentication, home, create journal, and display journal.</p>
@@ -43,14 +68,67 @@ error downloading? the apk is present in root directory of the repo
   <li>Firebase Firestore: A NoSQL database for storing and managing journal entries.</li>
 </ul>
 
-<h2>Usage</h2>
+# Development Environment Setup
 
-<p>To use the Daily Journal app, follow these steps:</p>
+## Prerequisites
 
-<ol>
-  <li>Clone the repository to your local machine.</li>
-  <li>Set up your Flutter development environment.</li>
-  <li>Connect the app to your Firebase project by configuring the necessary Firebase services.</li>
-  <li>Build and run the app on your preferred device or emulator.</li>
-  <li>Register an account or log in to start using the app.</li>
-</ol>
+### 1- Install Flutter
+
+Ensure Flutter is installed on your system. Follow the [official Flutter installation guide](https://docs.flutter.dev/get-started/install) for your operating system.
+
+    # Verify Flutter installation by running this command in terminal
+    flutter doctor
+
+Make sure there are no unresolved issues before proceeding.
+
+### 2- Install Dart SDK
+
+Flutter comes bundled with the Dart SDK. Ensure it's properly installed by checking the Dart version:
+
+    dart --version
+
+### 3- Install IDE or Code Editor
+
+Use an IDE like Android Studio or Visual Studio Code with Flutter and Dart plugins.
+
+### 4- Install Firebase CLI
+
+Install the Firebase CLI to initialize Firebase in your project.
+
+    npm install -g firebase-tools
+    firebase login
+
+# Project Setup
+
+### Clone the Repository
+
+    git clone <repository-url>
+    cd daily_journal
+
+For Installing Dependencies Run the following command to fetch all dependencies mentioned in the pubspec.yaml file:
+
+    flutter pub get
+
+### Set Up Firebase
+
+Install the FlutterFire CLI to configure Firebase.
+
+    dart pub global activate flutterfire_cli
+
+Initialize Firebase in the project:
+
+    flutterfire configure
+
+This generates the firebase_options.dart file with platform-specific Firebase configurations.
+
+### Run the Application To start the app on a connected device or emulator:
+
+    flutter run
+
+# Running Tests
+
+Run All Unit Tests The project includes unit tests located in the test directory. Use the following command to execute all tests:
+
+    flutter test
+
+This documentation should guide developers in setting up and running the project efficiently while adhering to best practices. For additional help, refer to the [official Flutter documentation](https://docs.flutter.dev/).
