@@ -23,6 +23,24 @@
 
 <p>The Daily Journal app is a Flutter application developed to help users record and manage their daily thoughts and experiences. This app utilizes Firebase, a cloud-based backend service, for user authentication and storage. The app consists of four main pages: authentication, home, create journal, and display journal.</p>
 
+
+https://github.com/user-attachments/assets/1826e2a4-d5fa-4d7a-ac53-67faf7504d24
+
+The video demonstration outlines the application flow and user interactions. Initially, users are presented with a **Landing Page**, which provides a brief introduction to the application. From there, they are redirected to the **Login Page**. For new users, a dedicated button at the bottom facilitates the account creation and authentication process.
+
+Upon successful authentication, users are navigated to the **Home Screen**, which serves as the central hub for managing journal entries. On this screen, users can perform the following actions:  
+
+- **Create a New Journal Entry:** Initiates the journal creation process.  
+- **View Journal Entry Details:** Displays a detailed view of a selected journal entry, including additional actions.  
+- **Logout:** Allows users to securely log out of the application.  
+
+The **View Journal Screen** offers further options for managing the selected journal entry:  
+- **Edit Button:** Enables modifications to the journal entry's content.  
+- **Delete Button:** Allows users to permanently remove the journal entry from the database.  
+
+
+
+
 <h2>Download Apk Directly</h2>
 <p>Download the apk file from the GitHub repository and install it on your device.</p>
     
